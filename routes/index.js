@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+import { asyncHandler } from '../utils/asyncHandler.js';
+
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, _next) {
-  res.render('index', { title: 'nodeprogramlama.com' });
-});
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    // Example async operation (simulating database call)
+    const title = await Promise.resolve('nodeprogramlama.com');
+    res.render('index', { title });
+  })
+);
 
-module.exports = router;
+export default router;

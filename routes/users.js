@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+import express from 'express';
+import { asyncHandler } from '../utils/asyncHandler.js';
+
+const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function (req, res, _next) {
-  res.send('respond with a resource');
-});
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    // Example async operation (simulating database query)
+    const users = await Promise.resolve([
+      { id: 1, name: 'User 1' },
+      { id: 2, name: 'User 2' },
+    ]);
+    res.json(users);
+  })
+);
 
-module.exports = router;
+export default router;
